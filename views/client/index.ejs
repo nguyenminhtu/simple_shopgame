@@ -1,0 +1,36 @@
+<% include partials/header.ejs %>
+
+    <div class="container main">
+        <div class="row">
+            <div class="well"><h4><i class="glyphicon glyphicon-bookmark"></i>&nbsp;Feature Games</h4></div>
+            <% products.forEach(function(product){ %>
+                <div class="col-sm-3 well item">
+                    <img src="/uploads/<%= product.image %>" alt="<%= product.title %>}" class="img-responsive">
+                    <br>
+                    <p class="lead"><%= product.title %></p>
+                    <p><%= product.description %></p>
+                    <p class="clearfix">
+                        <span class="pull-left"><strong><i class="glyphicon glyphicon-usd"></i><%= product.price %></strong></span>
+                        <span class="pull-right"><button class="btn btn-success">Add to cart</button></span>
+                    </p>
+                </div>
+            <%});%>
+        </div>
+        <div class="row">
+            <div class="well"><h4><i class="glyphicon glyphicon-bookmark"></i>&nbsp;Latest Games</h4></div>
+            <% latest.forEach(function(late){ %>
+            <div class="col-sm-3 well item">
+                <img src="/uploads/<%= late.image %>" alt="<%= late.title %>}" class="img-responsive">
+                <br>
+                <p class="lead"><%= late.title %></p>
+                <p><%= late.description %></p>
+                <p class="clearfix">
+                    <span class="pull-left"><strong><i class="glyphicon glyphicon-usd"></i><%= late.price %></strong></span>
+                    <span class="pull-right"><button class="btn btn-success">Add to cart</button></span>
+                </p>
+            </div>
+            <%});%>
+        </div>
+    </div>
+
+<% include partials/footer.ejs %>

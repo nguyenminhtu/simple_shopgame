@@ -1,0 +1,22 @@
+{
+  "name": "simpleCommerce",
+  "description": "simple-commerce",
+  "main": "app.js",
+  "authors": [
+    "Nguyen Tu <tuunguyen2795@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "bootstrap-social-buttons": "^1.0.0"
+  }
+}
