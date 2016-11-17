@@ -9,7 +9,7 @@ router.get('/', ensureAuthenticated, function (req, res) {
         if(err){
             res.end(err);
         }else{
-            res.render('admin/user/users', {title: 'Admin Area - User', users: users});
+            res.render('admin/user/users', {title: 'Admin Area - User', users: users, csrfToken: req.csrfToken()});
         }
     });
 });
@@ -22,12 +22,12 @@ router.post('/login', passport.authenticate('local.signin', {failureRedirect: '/
     }
 });
 
-router.get('/logout', ensureAuthenticated, function (req, res) {
+router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/admin/login');
 });
 
-router.delete('/delete/:id', ensureAuthenticated, function (req, res) {
+router.delete('/delete/:id', function (req, res) {
     var id = req.params.id;
     var query = { _id: id };
     User.findOneAndRemove(query, function (err, result) {
@@ -39,7 +39,6 @@ router.delete('/delete/:id', ensureAuthenticated, function (req, res) {
     });
 });
 
-module.exports = router;
 
 function ensureAuthenticated(req, res, next){
     if(req.isAuthenticated() && req.user.level === 0){
@@ -48,3 +47,5 @@ function ensureAuthenticated(req, res, next){
         res.redirect('/admin/login');
     }
 };
+
+module.exports = router;

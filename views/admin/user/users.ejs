@@ -30,7 +30,7 @@
                         <span style="color: green">User</span>
                     <%}%>
                 </td>
-                <td class="text-center"><a href="javascript:void(0)"><button id-delete="<%= user._id %>" class="btn btn-danger deleteUser"
+                <td class="text-center"><a href="javascript:void(0)"><button csrf="<%= csrfToken %>" id-delete="<%= user._id %>" class="btn btn-danger deleteUser"
                                 <% if(user.level === 0){ %>
                                     disabled
                                 <%}%>

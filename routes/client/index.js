@@ -35,8 +35,8 @@ router.post('/contact.htm', function (req, res) {
         from: 'noreply@shop-game.herokuapp.com',
         to: 'tuunguyen2795@gmail.com',
         subject: 'Shop Game submission',
-        text: 'You have a new submission from NodeBlog with the following details...Name: '+req.body.name+' Email: '+req.body.email+' Message: '+req.body.message+'',
-        html: '<p>You have a new submission from Express Website with the following details...</p><ul><li>Name: '+req.body.name+'</li><li>Email: '+req.body.email+'</li><li>Message: '+req.body.message+'</li></ul>'
+        text: 'You have a new submission from your Shp Game with the following details...Name: '+req.body.name+' Email: '+req.body.email+' Message: '+req.body.message+'',
+        html: '<p>You have a new submission from your Shop Game with the following details...</p><ul><li>Name: '+req.body.name+'</li><li>Email: '+req.body.email+'</li><li>Message: '+req.body.message+'</li></ul>'
     };
 
     transporter.sendMail(mailOptions, function(error, info){

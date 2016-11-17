@@ -13,9 +13,11 @@ $(document).ready(function () {
         confirmDelete();
         if(kt == true) {
             var id = $(this).attr('id-delete');
+            var _csrf = $(this).attr('csrf');
             $.ajax({
                 url: '/admin/categories/delete/' + id,
                 type: 'DELETE',
+                data: {_csrf: _csrf},
                 success: function (data) {
                     if (data === 'ok') {
                         $('tr#' + id).remove();
@@ -29,9 +31,11 @@ $(document).ready(function () {
         confirmDelete();
         if(kt == true) {
             var id = $(this).attr('id-delete');
+            var _csrf = $(this).attr('csrf');
             $.ajax({
                 url: '/admin/products/delete/' + id,
                 type: 'DELETE',
+                data: {_csrf: _csrf},
                 success: function (data) {
                     if (data === 'ok') {
                         $('tr#' + id).remove();
@@ -45,9 +49,11 @@ $(document).ready(function () {
         confirmDelete();
         if(kt == true) {
             var id = $(this).attr('id-delete');
+            var _csrf = $(this).attr('csrf');
             $.ajax({
                 url: '/admin/users/delete/' + id,
                 type: 'DELETE',
+                data: {_csrf: _csrf},
                 success: function (data) {
                     if (data === 'ok') {
                         $('tr#' + id).remove();

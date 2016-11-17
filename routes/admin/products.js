@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
+var csrf = require('csurf');
+
+var csrfProtection = csrf();
+router.use(csrfProtection);
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -21,18 +25,18 @@ router.get('/', ensureAuthenticated, function (req, res) {
         if(err){
             res.end(err);
         }else{
-            res.render('admin/product/products', {title: 'Admin Area - Product', products: products});
+            res.render('admin/product/products', {title: 'Admin Area - Product', products: products, csrfToken: req.csrfToken()});
         }
     });
 });
 
-router.get('/add', function (req, res) {
+router.get('/add', ensureAuthenticated, function (req, res) {
     Category.find().exec(function (err, category) {
-        res.render('admin/product/addproduct', {title: "Admin Area - Add Product", category: category});
+        res.render('admin/product/addproduct', {title: "Admin Area - Add Product", category: category, csrfToken: req.csrfToken()});
     });
 });
 
-router.post('/add', ensureAuthenticated, upload.single('image'), function (req, res) {
+router.post('/add', upload.single('image'), function (req, res) {
     var title = req.body.title;
     var description = req.body.description;
     var image = req.file.originalname;
@@ -66,7 +70,7 @@ router.post('/add', ensureAuthenticated, upload.single('image'), function (req, 
     });
 });
 
-router.delete('/delete/:id', ensureAuthenticated, function (req, res) {
+router.delete('/delete/:id', function (req, res) {
     var id = req.params.id;
     var query = { _id: id };
     Product.findOneAndRemove(query, function (err, result) {
@@ -85,13 +89,13 @@ router.get('/edit/:id', ensureAuthenticated, function (req, res) {
             res.end(err);
         }else{
             Category.find().exec(function (err, cate) {
-                res.render('admin/product/editproduct', {title: "Admin Area - Edit Product", product: product, category: cate});
+                res.render('admin/product/editproduct', {title: "Admin Area - Edit Product", product: product, category: cate, csrfToken: req.csrfToken()});
             });
         }
     });
 });
 
-router.post('/edit/:id', ensureAuthenticated, upload.single('image'), function (req, res) {
+router.post('/edit/:id', upload.single('image'), function (req, res) {
     var id = req.params.id;
     var query = { _id: id };
     var title = req.body.title;
@@ -122,8 +126,6 @@ router.post('/edit/:id', ensureAuthenticated, upload.single('image'), function (
 });
 
 
-module.exports = router;
-
 function ensureAuthenticated(req, res, next){
     if(req.isAuthenticated() && req.user.level === 0){
         next();
@@ -131,3 +133,6 @@ function ensureAuthenticated(req, res, next){
         res.redirect('/admin/login');
     }
 };
+
+module.exports = router;
+

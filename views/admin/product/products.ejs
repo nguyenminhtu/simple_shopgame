@@ -27,7 +27,7 @@
                         <td class="text-center"><%= product.price %></td>
                         <td class="text-center"><%= product.description %></td>
                         <td class="text-right"><a href="/admin/products/edit/<%= product._id %>"><button class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</button></a></td>
-                        <td class="text-left"><a href="javascript:void(0)"><button id-delete="<%= product._id %>" class="btn btn-danger deleteProduct"><i class="glyphicon glyphicon-remove"></i>&nbsp;Delete</button></a></td>
+                        <td class="text-left"><a href="javascript:void(0)"><button csrf="<%= csrfToken %>" id-delete="<%= product._id %>" class="btn btn-danger deleteProduct"><i class="glyphicon glyphicon-remove"></i>&nbsp;Delete</button></a></td>
                         <%i++%>
                     </tr>
                 <%});%>

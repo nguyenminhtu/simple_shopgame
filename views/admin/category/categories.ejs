@@ -19,7 +19,7 @@
                             <td class="text-center"><%= cate._id %></td>
                             <td class="text-center"><%= cate.title %></td>
                             <td class="text-right"><a href="/admin/categories/edit/<%= cate._id %>"><button class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</button></a></td>
-                            <td class="text-left"><a href="javascript:void(0)"><button id-delete="<%= cate._id %>" class="btn btn-danger deleteCate"><i class="glyphicon glyphicon-remove"></i>&nbsp;Delete</button></a></td>
+                            <td class="text-left"><a href="javascript:void(0)"><button csrf="<%= csrfToken %>" id-delete="<%= cate._id %>" class="btn btn-danger deleteCate"><i class="glyphicon glyphicon-remove"></i>&nbsp;Delete</button></a></td>
                             <%i++%>
                         </tr>
                     <%});%>

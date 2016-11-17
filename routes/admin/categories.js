@@ -1,5 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var csrf = require('csurf');
+
+var csrfProtection = csrf();
+router.use(csrfProtection);
 
 Category = require('../../models/category');
 
@@ -8,16 +12,16 @@ router.get('/', ensureAuthenticated, function (req, res) {
         if(err){
             res.end(err);
         }else{
-            res.render('admin/category/categories', {title: 'Admin Area - Category', categories: categories});
+            res.render('admin/category/categories', {title: 'Admin Area - Category', categories: categories, csrfToken: req.csrfToken()});
         }
     });
 });
 
 router.get('/add', ensureAuthenticated, function (req, res) {
-    res.render('admin/category/addcategory', {title: "Admin Area - Add Category"});
+    res.render('admin/category/addcategory', {title: "Admin Area - Add Category", csrfToken: req.csrfToken()});
 });
 
-router.post('/add', ensureAuthenticated, function (req, res) {
+router.post('/add', function (req, res) {
     var title = req.body.title;
     var category = new Category({
         title: title
@@ -31,7 +35,7 @@ router.post('/add', ensureAuthenticated, function (req, res) {
     });
 });
 
-router.delete('/delete/:id', ensureAuthenticated, function (req, res) {
+router.delete('/delete/:id', function (req, res) {
     var id = req.params.id;
     var query = { _id: id };
     Category.findOneAndRemove(query, function (err, result) {
@@ -49,12 +53,12 @@ router.get('/edit/:id', ensureAuthenticated, function (req, res) {
         if(err){
             res.end(err);
         }else{
-            res.render('admin/category/editcategory', {title: "Admin Area - Edit Category", category: cate});
+            res.render('admin/category/editcategory', {title: "Admin Area - Edit Category", category: cate, csrfToken: req.csrfToken()});
         }
     });
 });
 
-router.post('/edit/:id', ensureAuthenticated, function (req, res) {
+router.post('/edit/:id', function (req, res) {
     var id = req.params.id;
     var query = { _id: id };
     Category.findOneAndUpdate(query, { title: req.body.title }, function (err, result) {
@@ -67,8 +71,6 @@ router.post('/edit/:id', ensureAuthenticated, function (req, res) {
 });
 
 
-module.exports = router;
-
 function ensureAuthenticated(req, res, next){
     if(req.isAuthenticated() && req.user.level === 0){
         next();
@@ -76,3 +78,6 @@ function ensureAuthenticated(req, res, next){
         res.redirect('/admin/login');
     }
 };
+
+module.exports = router;
+

@@ -13,8 +13,7 @@
 <div class="container">
     <div class="row">
         <div class="well">Category: <b style="color: red"><%= category.title %></b></div>
-        <div class="well">
-            <% if(category.products){ %>
+            <% if(category.products.length > 0){ %>
                 <% category.products.forEach(function(product){ %>
                 <div class="col-sm-3 well item">
                     <img src="/uploads/<%= product.product_image %>" alt="<%= product.product_title %>}" class="img-responsive">
@@ -30,7 +29,6 @@
             <% }else{ %>
                 <h2>This category don't have any product.</h2>
             <%}%>
-        </div>
     </div>
 </div>
 
