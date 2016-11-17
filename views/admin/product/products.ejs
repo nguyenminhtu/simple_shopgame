@@ -1,0 +1,39 @@
+<% include ../partials/header.ejs %>
+<% var i = 1 %>
+
+    <div class="container product-item">
+        <div class="row">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th class="text-center">STT</th>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Title</th>
+                    <th class="text-center">Category</th>
+                    <th class="text-center">Image</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Description</th>
+                    <th class="text-center" colspan="2"><a href="/admin/products/add"><button class="btn btn-success"><i class="glyphicon glyphicon-plus"></i>Add Product</button></a></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% products.forEach(function(product){ %>
+                    <tr id="<%= product._id %>">
+                        <td class="text-center"><%= i %></td>
+                        <td class="text-center"><%= product._id %></td>
+                        <td class="text-center"><%= product.title %></td>
+                        <td class="text-center"><%= product.category %></td>
+                        <td class="text-center"><img src="/uploads/<%= product.image %>" alt="<%= product.title %>" class="img-responsive"></td>
+                        <td class="text-center"><%= product.price %></td>
+                        <td class="text-center"><%= product.description %></td>
+                        <td class="text-right"><a href="/admin/products/edit/<%= product._id %>"><button class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</button></a></td>
+                        <td class="text-left"><a href="javascript:void(0)"><button id-delete="<%= product._id %>" class="btn btn-danger deleteProduct"><i class="glyphicon glyphicon-remove"></i>&nbsp;Delete</button></a></td>
+                        <%i++%>
+                    </tr>
+                <%});%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<%include ../partials/footer.ejs%>

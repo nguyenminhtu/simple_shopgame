@@ -1,17 +1,21 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://tunguyen:123456@ds149557.mlab.com:49557/demo-shopping');
 var session = require('express-session');
+var passport = require('passport');
 var flash = require('connect-flash');
-var moment = require('moment');
+require('./config/passport');
 
-var index = require('./routes/client/index');
-var users = require('./routes/client/users');
+var indexRoutes = require('./routes/client/index');
+var userRoutes = require('./routes/client/users');
+var adminIndexRoutes = require('./routes/admin/index');
+var adminProductRoutes = require('./routes/admin/products');
+var adminCategoryRoutes = require('./routes/admin/categories');
+var adminUserRoutes = require('./routes/admin/users');
 
 var app = express();
 
@@ -20,15 +24,32 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(flash());
+app.use(session({secret: 'tudeptrai', resave: false, saveUninitialized: false}));
+
 app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+//Global variable
+app.use(function (req, res, next) {
+    res.locals.messages = require('express-messages')(req, res);
+    res.locals.user = req.user || null;
+    res.locals.session = req.session;
+    next();
+});
+
+app.use('/', indexRoutes);
+app.use('/users', userRoutes);
+app.use('/admin', adminIndexRoutes);
+app.use('/admin/products', adminProductRoutes);
+app.use('/admin/categories', adminCategoryRoutes);
+app.use('/admin/users', adminUserRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

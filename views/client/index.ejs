@@ -1,8 +1,18 @@
 <% include partials/header.ejs %>
+<nav class="navbar navbar-default" id="menu">
+    <ul class="nav navbar-nav menu-item">
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+        <% menu.forEach(function(me){ %>
+        <li>
+            <a href="/categories/<%= me._id %>"><%= me.title %></a>
+        </li>
+        <%});%>
+    </ul>
+</nav>
 
     <div class="container main">
         <div class="row">
-            <div class="well"><h4><i class="glyphicon glyphicon-bookmark"></i>&nbsp;Feature Games</h4></div>
+            <div class="well" style="padding: 10px 10px 10px 20px;"><h4><i class="glyphicon glyphicon-bookmark"></i>&nbsp;Feature Games</h4></div>
             <% products.forEach(function(product){ %>
                 <div class="col-sm-3 well item">
                     <img src="/uploads/<%= product.image %>" alt="<%= product.title %>}" class="img-responsive">
@@ -17,7 +27,7 @@
             <%});%>
         </div>
         <div class="row">
-            <div class="well"><h4><i class="glyphicon glyphicon-bookmark"></i>&nbsp;Latest Games</h4></div>
+            <div class="well" style="padding: 10px 10px 10px 20px;"><h4><i class="glyphicon glyphicon-bookmark"></i>&nbsp;Latest Games</h4></div>
             <% latest.forEach(function(late){ %>
             <div class="col-sm-3 well item">
                 <img src="/uploads/<%= late.image %>" alt="<%= late.title %>}" class="img-responsive">

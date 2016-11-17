@@ -1,0 +1,46 @@
+<% include ../partials/header.ejs %>
+<% var i = 1 %>
+
+<div class="container product-item">
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">STT</th>
+                <th class="text-center">ID</th>
+                <th class="text-center">Full Name</th>
+                <th class="text-center">Username</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Level</th>
+                <th class="text-center"><i class="glyphicon glyphicon-wrench"></i>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% users.forEach(function(user){ %>
+            <tr id="<%= user._id %>">
+                <td class="text-center"><%= i %></td>
+                <td class="text-center"><%= user._id %></td>
+                <td class="text-center"><%= user.fullname %></td>
+                <td class="text-center"><%= user.username %></td>
+                <td class="text-center"><%= user.email %></td>
+                <td class="text-center">
+                    <% if(user.level == 0){ %>
+                        <span style="color: red">Admin</span>
+                    <%}else{%>
+                        <span style="color: green">User</span>
+                    <%}%>
+                </td>
+                <td class="text-center"><a href="javascript:void(0)"><button id-delete="<%= user._id %>" class="btn btn-danger deleteUser"
+                                <% if(user.level === 0){ %>
+                                    disabled
+                                <%}%>
+                                ><i class="glyphicon glyphicon-remove"></i>&nbsp;Delete</button></a></td>
+                <%i++%>
+            </tr>
+            <%});%>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<%include ../partials/footer.ejs%>

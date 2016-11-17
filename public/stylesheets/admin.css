@@ -1,0 +1,10 @@
+*{margin: 0px;padding: 0px;}
+body{background-color: #e1e1e1}
+nav.navbar-default{margin-bottom: 0px;}
+div.welcome{position: relative}
+div.welcome img{width: 100%;height: 550px;}
+div.welcome h1{position: absolute;top: 100px;left: 32%;}
+footer{width: 100%;height: 200px;padding: 70px 50px 50px 50px;}
+a{color: #000;}
+a:hover{text-decoration: none}
+div.product-item tbody img{width: 70%;max-height: 200px;margin-left: 62px}

@@ -1,0 +1,37 @@
+<% include partials/header.ejs %>
+<nav class="navbar navbar-default" id="menu">
+    <ul class="nav navbar-nav menu-item">
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+        <% menu.forEach(function(me){ %>
+        <li>
+            <a href="/categories/<%= me._id %>"><%= me.title %></a>
+        </li>
+        <%});%>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="well">Category: <b style="color: red"><%= category.title %></b></div>
+        <div class="well">
+            <% if(category.products){ %>
+                <% category.products.forEach(function(product){ %>
+                <div class="col-sm-3 well item">
+                    <img src="/uploads/<%= product.product_image %>" alt="<%= product.product_title %>}" class="img-responsive">
+                    <br>
+                    <p class="lead"><%= product.product_title %></p>
+                    <p><%= product.product_description %></p>
+                    <p class="clearfix">
+                        <span class="pull-left"><strong><i class="glyphicon glyphicon-usd"></i><%= product.product_price %></strong></span>
+                        <span class="pull-right"><button class="btn btn-success">Add to cart</button></span>
+                    </p>
+                </div>
+                <%});%>
+            <% }else{ %>
+                <h2>This category don't have any product.</h2>
+            <%}%>
+        </div>
+    </div>
+</div>
+
+<% include partials/footer.ejs %>

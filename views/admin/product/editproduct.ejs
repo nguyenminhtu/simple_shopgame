@@ -1,0 +1,48 @@
+<% include ../partials/header.ejs %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+            <h1 class="text-center">Edit Product <br><small><i><%= product.title %></i></small></h1>
+            <form action="/admin/products/edit/<%= product._id %>" method="post" role="form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Title..." required autofocus value="<%= product.title %>">
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" class="form-control">
+                        <% category.forEach(function(cate) { %>
+                            <option value="<%= cate._id %>"
+                                    <% if(product.category == cate.title){ %>
+                                        selected="selected"
+                                    <%}%>
+                                    ><%= cate.title %></option>
+                        <%});%>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control" name="image" id="image">
+                    <img src="/uploads/<%= product.image %>" alt="" class="img-responsive" width="100" height="96">
+                    <input type="hidden" name="old_image" value="<%= product.image %>">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" name="description" id="description" placeholder="Description..." required value="<%= product.description %>">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" name="price" id="price" placeholder="Price..." required value="<%= product.price %>">
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <button type="submit" class="btn btn-primary btn-block">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>

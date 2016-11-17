@@ -1,0 +1,18 @@
+<% include ../partials/header.ejs %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+            <h1 class="text-center">Edit Category <small><%= category.title %></small></h1>
+            <form action="/admin/categories/edit/<%= category._id %>" method="post" role="form">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Title..." required value="<%= category.title %>" autofocus>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>
