@@ -11,10 +11,29 @@ $(document).ready(function(){
         $('#back-to-top').tooltip('hide');
         $('body,html').animate({
             scrollTop: 0
-        }, 400);
+        }, 300);
         return false;
     });
 
     $('#back-to-top').tooltip('show');
+
+
+    $('#username-signup').blur(function () {
+        var username = $(this).val();
+        $.ajax({
+            url: '/users/check/'+username,
+            type: 'GET',
+            success: function (data) {
+                if(data === 'match'){
+                    $("#checkUsername").html('Username is already registered.').css('color','red').css('margin-left','10px').css('margin-top','5px');
+                    $('#username-signup').select();
+                }else if(data === 'notMatch'){
+                    $("#checkUsername").html('Username is valid').css('color','green').css('margin-left','10px').css('margin-top','5px');
+                }
+            }
+        });
+    });
+
+    $("ul.success").fadeOut(10000);
 
 });

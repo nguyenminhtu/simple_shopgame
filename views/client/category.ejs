@@ -12,17 +12,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="well">Category: <b style="color: red"><%= category.title %></b></div>
-            <% if(category.products.length > 0){ %>
-                <% category.products.forEach(function(product){ %>
+        <div class="well">Category: <b style="color: red"><%= category.title %></b>&nbsp;&nbsp;&nbsp;(<%= products.length %> product)</div>
+            <% if(products.length > 0){ %>
+                <% products.forEach(function(product){ %>
                 <div class="col-sm-3 well item">
-                    <img src="/uploads/<%= product.product_image %>" alt="<%= product.product_title %>}" class="img-responsive">
+                    <img src="/uploads/<%= product.image %>" alt="<%= product.title %>}" class="img-responsive">
                     <br>
-                    <p class="lead"><%= product.product_title %></p>
-                    <p><%= product.product_description %></p>
+                    <p class="lead"><%= product.title %></p>
+                    <p><%= product.description %></p>
                     <p class="clearfix">
-                        <span class="pull-left"><strong><i class="glyphicon glyphicon-usd"></i><%= product.product_price %></strong></span>
-                        <span class="pull-right"><button class="btn btn-success">Add to cart</button></span>
+                        <span class="pull-left"><strong><i class="glyphicon glyphicon-usd"></i><%= product.price %></strong></span>
+                        <a href="/add-to-cart/<%= product._id %>"><span class="pull-right"><button class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i></button></span></a>
                     </p>
                 </div>
                 <%});%>

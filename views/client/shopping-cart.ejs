@@ -1,0 +1,70 @@
+<% include partials/header.ejs %>
+<nav class="navbar navbar-default" id="menu">
+    <ul class="nav navbar-nav menu-item">
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+        <% menu.forEach(function(me){ %>
+        <li>
+            <a href="/categories/<%= me._id %>"><%= me.title %></a>
+        </li>
+        <%});%>
+    </ul>
+</nav>
+
+<%var stt = 1%>
+<div class="container">
+    <% if(products && products.length > 0){ %>
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">STT</th>
+                        <th class="text-center">Product Name</th>
+                        <th class="text-center">Image</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">Total</th>
+                        <th class="text-center">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% products.forEach(function(product){ %>
+                        <tr id="<%= product.item._id %>">
+                            <td class="text-center"><%= stt %></td>
+                            <td class="text-center"><%= product.item.title %></td>
+                            <td class="text-center">
+                                <img src="/uploads/<%= product.item.image %>" style="max-height: 100px;width: 100px" alt="<%= product.item.title %>" class="img-responsive">
+                            </td>
+                            <td class="text-center">$ <span id="<%= product.item._id %>"><%= product.item.price %></span></td>
+                            <td class="text-center"><input type="number" value="<%= product.qty %>" qty-value="<%= product.qty %>" class="cart-quantity" id-product="<%= product.item._id %>"></td>
+                            <td class="text-center">$<span class="<%= product.item._id %>"><%= product.price %></span></td>
+                            <td class="text-center"><a href="/remove/<%= product.item._id %>"><button class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>Remove All</button></a></td>
+                        </tr>
+                        <% stt++ %>
+                    <%});%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <strong>Total: $ <span id="cart-totalPrice"><%= totalPrice %></span></strong>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <a href="/checkout.express" class="btn btn-success">Checkout</a>
+            </div>
+        </div>
+    <%}else{%>
+        <div class="row">
+            <h2 class="text-center">No Items In Your Cart.</h2>
+            <p class="text-center"><a href="/" class="btn btn-success">Go to shopping now</a></p>
+        </div>
+    <%}%>
+</div>
+<script type="text/javascript" src="/javascripts/tu.js"></script>
+
+<% include partials/footer.ejs %>

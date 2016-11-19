@@ -11,19 +11,23 @@
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <a class="navbar-brand" href="">Shopping Online</a>
+    <a class="navbar-brand" href="">Shop Game</a>
     <ul class="nav navbar-nav">
         <li class="">
             <a href="/"><i class="glyphicon glyphicon-home"></i>&nbsp;Homepage</a>
         </li>
         <li>
-            <a href="/about.htm">&nbsp;About</a>
+            <a href="/about.express">&nbsp;About</a>
         </li>
         <li>
-            <a href="/contact.htm">&nbsp;Contact</a>
+            <a href="/contact.express">&nbsp;Contact</a>
         </li>
         <li>
-            <a href="/cart.htm"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;Shopping Cart</a>
+            <a href="/shopping-cart.express"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;Shopping Cart <span class="badge"><% if(session.cart){ %>
+                <%=session.cart.totalQty%>
+                <%}else{%>
+                    0
+                <%}%></span></a>
         </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -36,6 +40,8 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user"></i>&nbsp;<%= user.fullname %> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                    <li><a href="/users/profile"><i class="glyphicon glyphicon-briefcase"></i>&nbsp;User Profile&nbsp;</a></li>
+                    <li class="divider"></li>
                     <li><a href="/users/signout"><i class="glyphicon glyphicon-log-out"></i>&nbsp;Logout&nbsp;</a></li>
                 </ul>
             </li>
@@ -94,3 +100,4 @@
         </a>
     </div>
 </section>
+<script type="text/javascript" src="/lib/jquery/dist/jquery.js"></script>

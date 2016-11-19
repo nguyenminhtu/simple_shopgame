@@ -6,6 +6,7 @@
             <h1 class="text-center">Edit Product <br><small><i><%= product.title %></i></small></h1>
             <form action="/admin/products/edit/<%= product._id %>?_csrf=<%= csrfToken %>" method="post" role="form" enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="hidden" name="old_title" value="<%= product.title %>">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title" placeholder="Title..." required autofocus value="<%= product.title %>">

@@ -12,6 +12,11 @@
 
     <div class="container main">
         <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <%- messages() %>
+            </div>
+        </div>
+        <div class="row">
             <div class="well" style="padding: 10px 10px 10px 20px;"><h4><i class="glyphicon glyphicon-bookmark"></i>&nbsp;Feature Games</h4></div>
             <% products.forEach(function(product){ %>
                 <div class="col-sm-3 well item">
@@ -21,7 +26,7 @@
                     <p><%= product.description %></p>
                     <p class="clearfix">
                         <span class="pull-left"><strong><i class="glyphicon glyphicon-usd"></i><%= product.price %></strong></span>
-                        <span class="pull-right"><button class="btn btn-success">Add to cart</button></span>
+                        <a href="/add-to-cart/<%= product._id %>"><span class="pull-right"><button class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i></button></span></a>
                     </p>
                 </div>
             <%});%>
@@ -36,7 +41,7 @@
                 <p><%= late.description %></p>
                 <p class="clearfix">
                     <span class="pull-left"><strong><i class="glyphicon glyphicon-usd"></i><%= late.price %></strong></span>
-                    <span class="pull-right"><button class="btn btn-success">Add to cart</button></span>
+                    <a href="/add-to-cart/<%= late._id %>"><span class="pull-right"><button class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i></button></span></a>
                 </p>
             </div>
             <%});%>

@@ -1,10 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
-var csrf = require('csurf');
-
-var csrfProtection = csrf();
-router.use(csrfProtection);
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -54,17 +50,24 @@ router.post('/add', upload.single('image'), function (req, res) {
             if(err){
                 res.end(err);
             }else{
-                var query = {_id: cate_id};
-                Category.findOneAndUpdate(query,
-                    {$push: {products: {product_title: title, product_image: image, product_price: price, product_description: description}}},
-                    {safe: true, upsert: true}, function (err, result) {
-                        if(err){
-                            res.end(err);
-                        }else{
-                            res.redirect('/admin/products');
-                        }
+                var query = {'products.product_title': title};
+                Category.findOne(query, function (err, cate_result) {
+                    if(!cate_result){
+                        var query = {_id: cate_id};
+                        Category.findOneAndUpdate(query,
+                            {$push: {products: {product_title: title, product_image: image, product_price: price, product_description: description}}},
+                            {safe: true, upsert: true}, function (err, result) {
+                                if(err){
+                                    res.end(err);
+                                }else{
+                                    res.redirect('/admin/products');
+                                }
+                            }
+                        );
+                    }else{
+                        res.redirect('/admin/products');
                     }
-                );
+                });
             }
         });
     });
@@ -119,7 +122,12 @@ router.post('/edit/:id', upload.single('image'), function (req, res) {
             if(err){
                 res.end(err);
             }else{
-                res.redirect('/admin/products');
+                var query = { 'products.product_title': req.body.old_title};
+                Category.findOneAndUpdate(query,
+                    {$push: {products: {product_title: title, product_image: image, product_price: price, product_description: description}}},                          {safe: true, upsert: true},
+                    function (err, result) {
+                        res.redirect('/admin/products');
+                    });
             }
         });
     });
@@ -127,7 +135,7 @@ router.post('/edit/:id', upload.single('image'), function (req, res) {
 
 
 function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated() && req.user.level === 0){
+    if(req.isAuthenticated()){
         next();
     }else{
         res.redirect('/admin/login');

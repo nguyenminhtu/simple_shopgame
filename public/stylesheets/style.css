@@ -22,3 +22,11 @@ div.item img{width: 70%;height: 200px;margin-left: 36px;}
 .about-author #description p{text-indent: 17px;text-align: justify;color: #fff}
 .contact{margin-top: 55px;margin-bottom: 40px;}
 .contact p.contact-title{font-size: 30px;font-weight: bolder;text-shadow: 4px 3px 4px rgba(150, 150, 150, 1);}
+ul.success, ul.error{padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;padding-left: 27px;}
+ul.success{color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;}
+ul.success li, ul.error li{list-style: none}
