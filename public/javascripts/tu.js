@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $(".cart-quantity").blur(function () {
+    $(".cart-quantity").change(function () {
         var productId = $(this).attr('id-product');
         var qty = $(this).attr('qty-value')
         var old_totalPrice = $("#cart-totalPrice").text();
